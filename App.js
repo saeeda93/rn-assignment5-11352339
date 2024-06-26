@@ -1,158 +1,117 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import batteryImage from './assets/battery.png'; // Import the battery image
+import profileImage from './assets/profile.png'; // Import the profile image
+import searchImage from './assets/search.png'; // Import the search image
+import cardImage from './assets/Card.png'; // Import the card image
 
-const App = () => {
+
+
+export default function App() {
   return (
-    <ScrollView style={styles.container}>
-      {/* Header Section */}
-      <View style={styles.header}>
-        <Text style={styles.welcomeText}>Welcome back,</Text>
-        <Text style={styles.userName}>Eric Atsu</Text>
-        <View style={styles.navButtons}>
-          {['Topup', 'Receive', 'Sent', 'Loan'].map((item) => (
-            <TouchableOpacity key={item} style={styles.navButton}>
-              <Text style={styles.navButtonText}>{item}</Text>
-            </TouchableOpacity>
-          ))}
+    <View style={styles.container}>
+      <View style={styles.statusBar}>
+        <Text style={styles.timeText}>9:41</Text>
+        <Image
+          style={styles.statusImage}
+          source={batteryImage}
+        />
+      </View>
+      <View style={styles.profileContainer}>
+        <Image
+          style={styles.profileImage}
+          source={profileImage}
+        />
+        <View style={styles.profileTextContainer}>
+          <Text style={styles.welcomeText}>Welcome back,</Text>
+          <Text style={styles.userName}>Eric Atsu</Text>
         </View>
+        <Image
+          style={styles.searchImage}
+          source={searchImage}
+        />
       </View>
-
-      {/* Transaction Section */}
-      <View style={styles.transactionSection}>
-        <Text style={styles.transactionTitle}>$300</Text>
-        <Text style={styles.transactionSubtitle}>Money Transfer</Text>
-        {[
-          { amount: '- $ 88', description: 'Grocery Shopping' },
-          { amount: '- $5,99', description: 'Apple Store Entertainment' },
-          { amount: '- $12,99', description: 'Spotify Music' },
-          { amount: '- $5,99', description: 'Apple Store Entertainment' },
-        ].map((transaction, index) => (
-          <View key={index} style={styles.transaction}>
-            <Text style={styles.transactionAmount}>{transaction.amount}</Text>
-            <Text style={styles.transactionDescription}>{transaction.description}</Text>
-          </View>
-        ))}
+      <View style={styles.cardContainer}>
+        <Image
+          style={styles.cardImage}
+          source={cardImage}
+        />
       </View>
-
-      {/* Card Section */}
-      <View style={styles.cardSection}>
-        <Text style={styles.cardNumber}>4562 1122 4595 7852</Text>
-        <Text style={styles.cardName}>AR Jonson</Text>
-        <View style={styles.cardDetails}>
-          <Text style={styles.cardDetail}>Expiry Date</Text>
-          <Text style={styles.cardDetail}>24/2000</Text>
-        </View>
-        <View style={styles.cardDetails}>
-          <Text style={styles.cardDetail}>CVV</Text>
-          <Text style={styles.cardDetail}>6986</Text>
-        </View>
-        <Text style={styles.cardBrand}>Mastercard</Text>
-      </View>
-
-      {/* Settings Section */}
-      <View style={styles.settingsSection}>
-        {['Change Password', 'Privacy Policy', 'Theme', 'Language', 'Contact Us', 'My Profile'].map((item) => (
-          <TouchableOpacity key={item} style={styles.settingsButton}>
-            <Text style={styles.settingsButtonText}>{item}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-    </ScrollView>
+      
+    </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 60, // Adjust padding to avoid content overlap with status bar
+  },
+  statusBar: {
+    position: 'absolute',
+    top: 20, // Adjust the vertical position
+    left: 10, // Adjust the left position
+    right: 10, // Ensure the right padding
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between', // Distribute space between date and image
+    alignItems: 'center', // Align items vertically in the center
     backgroundColor: '#fff',
   },
-  header: {
-    marginBottom: 24,
+  timeText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
+    marginLeft: 20, // Add left margin to the time text
+  },
+  statusImage: {
+    width: 100, // Increased width of the image
+    height: 50, // Increased height of the image
+    resizeMode: 'contain',
+  },
+  profileContainer: {
+    flexDirection: 'row', // Arrange profile image, text, and search image horizontally
+    alignItems: 'flex-start', // Align items vertically at the start
+    marginTop: -280, // Position below the status bar with some space
+  },
+  profileImage: {
+    width: 50, // Set the width of the profile image
+    height: 50, // Set the height of the profile image
+    resizeMode: 'contain',
+    marginRight: 10, // Add space between the profile image and text
+  },
+  profileTextContainer: {
+    marginRight: 10, // Add space between the text and search image
   },
   welcomeText: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 16,
+    color: '#000',
   },
   userName: {
-    fontSize: 20,
-    marginBottom: 16,
-  },
-  navButtons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  navButton: {
-    padding: 10,
-    backgroundColor: '#ddd',
-    borderRadius: 8,
-    marginHorizontal: 4,
-  },
-  navButtonText: {
     fontSize: 16,
-  },
-  transactionSection: {
-    marginBottom: 24,
-  },
-  transactionTitle: {
-    fontSize: 32,
     fontWeight: 'bold',
+    color: '#000',
   },
-  transactionSubtitle: {
-    fontSize: 20,
-    marginBottom: 16,
+  searchImage: {
+    width: 160, // Set the width of the search image
+    height: 50, // Set the height of the search image
+    resizeMode: 'contain',
   },
-  transaction: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 8,
+  cardContainer: {
+    marginTop: 20, // Add space between profile section and card
+    width: '90%', // Make the card take up 90% of the screen width
+    alignItems: 'center', // Center the card horizontally
   },
-  transactionAmount: {
-    fontSize: 18,
+  cardImage: {
+    width: '100%', // Make the image take up the full width of the card container
+    height: 200, // Set the height of the card image
+    resizeMode: 'cover', // Cover the entire area of the image
+    borderRadius: 20, // Make the sides rounded
   },
-  transactionDescription: {
-    fontSize: 18,
-  },
-  cardSection: {
-    marginBottom: 24,
-    padding: 16,
-    backgroundColor: '#f8f8f8',
-    borderRadius: 8,
-  },
-  cardNumber: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  cardName: {
-    fontSize: 18,
-    marginBottom: 8,
-  },
-  cardDetails: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 4,
-  },
-  cardDetail: {
-    fontSize: 16,
-  },
-  cardBrand: {
-    fontSize: 18,
-    textAlign: 'right',
-    marginTop: 8,
-  },
-  settingsSection: {
-    marginBottom: 24,
-  },
-  settingsButton: {
-    padding: 12,
-    backgroundColor: '#ddd',
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  settingsButtonText: {
-    fontSize: 16,
+  mainText: {
+    marginTop: 20, // Ensure main text is not overlapped by card
+    textAlign: 'center',
   },
 });
-
-export default App;
